@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown, faAngleUp, faCartPlus } from '@fortawesome/free-solid-svg-icons';
+---
+
+<Layout title="Conjunto Esmeralda Quadrado">
+  <div class="relative">
+    <div class="relative w-full h-24">
+      <Image
+        src="/home-bg.jpeg"
+        alt="Hero"
+        width={1125}
+        height={750}
+        class="w-full h-24 absolute object-cover"
+      />
+      <div class="w-full h-24 absolute bg-black bg-opacity-65"></div>
+    </div>
+    <Header className="py-0 h-24" />
+  </div>
+  <nav class="bg-gray-100 py-12 px-6 text-center">
+    <h1 class="font-serif text-3xl uppercase tracking-bigger font-normal leading-relaxed text-tiny-black">
+      Conjunto esmeralda quadrado
+    </h1>
+    <div class="text-xs flex items-center gap-1 justify-center mt-4 uppercase text-small-gray tracking-wider">
+      <a href="/catalogo" class="text-esmerald">
+        Catálogo
+      </a>
+      <span>/</span>
+      <p>
+        Conjunto esmeralda quadrado
+      </p>
+    </div>
+  </nav>
+  <main class="flex flex-col lg:flex-row pb-20 lg:py-20 lg:px-20">
+    <Image
+      src="/corrente.jpeg"
+      alt="Corrente"
+      width={300}
+      height={100}
+      class="object-cover w-full h-80"
+    />
+    <div class="px-5 mt-5 flex flex-col lg:mt-0">
+      <h1 class="hidden lg:block text-2xl uppercase font-serif text-tiny-black mb-3">
+        Conjunto esmeralda quadrado
+      </h1>
+      <p class="font-serif font-light text-2xl text-esmerald mb-2 lg:mb-4">
+        R$ 99,50
+      </p>
+      <p class="text-small-gray text-sm font-light leading-6 self-start mb-5 lg:mb-auto">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
+
+      <div class="flex flex-row items-center gap-3">
+        <div class="border-2 border-esmerald inline-flex">
+          <input type="number" class="w-14 h-8 outline-none text-center" value="1" />
+          <div class="h-8 w-7 bg-esmerald flex flex-col">
+            <button class="text-white text-xs text-center">
+              <FontAwesomeIcon icon={faAngleUp} />
+            </button>
+            <button class="text-white text-xs text-center">
+              <FontAwesomeIcon icon={faAngleDown} />
+            </button>
+          </div>
+        </div>
+        <button class="font-serif text-white bg-esmerald border-2 border-esmerald h-9 px-6 text-xs uppercase">
+          <FontAwesomeIcon icon={faCartPlus} className="mr-1" /> Adicionar ao carrinho
+        </button>
+      </div>
+    </div>
+  </main>
+</Layout>

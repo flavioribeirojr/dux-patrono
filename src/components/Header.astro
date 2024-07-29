@@ -1,0 +1,11 @@
+---
+import { Header as HeaderComponent } from './Header';
+const path = Astro.url.pathname;
+const { className } = Astro.props;
+---
+
+<HeaderComponent
+  pathname={path}
+  className={className}
+  client:load
+/>

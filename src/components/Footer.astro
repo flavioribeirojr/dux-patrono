@@ -1,0 +1,47 @@
+---
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const year = new Date().getFullYear();
+---
+<footer class="bg-tiny-black w-full text-center text-white">
+  <div class="p-20 flex flex-col items-center lg:flex-row lg:justify-center lg:gap-28 lg:items-start">
+    <div class="flex flex-col items-center">
+      <img
+        src="/diamond.png"
+        alt="Diamond"
+        class="h-9 mb-3"
+      />
+      <p class="font-serif-text text-sm mb-4">DUX PATRONO</p>
+      <p class="text-white text-center text-opacity-50 text-sm leading-5 font-serif-text font-light mb-6 lg:w-72 lg:mt-auto lg:mb-0">
+        Nossa loja de joias de prata é o destino perfeito para quem busca peças únicas e de alta
+        qualidade.
+      </p>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <div class="h-9 mb-3">
+        <FontAwesomeIcon icon={faEnvelope} className="text-white text-4xl" />
+      </div>
+      <p class="font-serif-text text-sm mb-4">EMAIL  &  WHATSAPP</p>
+      <a
+        href="mailto:contato@duxpatrono.com"
+        class="text-white text-center text-opacity-50 text-sm leading-5 font-serif-text font-light mb-1"
+      >
+        contato@duxpatrono.com
+      </a>
+      <a
+        href="tel:9894141-5050"
+        class="text-white text-center text-opacity-50 text-sm leading-5 font-serif-text font-light"
+      >
+        (98) 94141-5050
+      </a>
+    </div>
+  </div>
+
+  <div class="bg-light-black w-full py-8 font-serif-text italic">
+    <p class="font-extralight text-sm">
+      <span class="text-white text-opacity-40">Dux Patrono</span> © { year }. Todos os direitos reservados
+    </p>
+  </div>
+</footer>

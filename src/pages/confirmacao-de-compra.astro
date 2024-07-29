@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+
+
+---
+
+<Layout title="Confirmação de compra">
+  <div class="relative mb-12">
+    <div class="relative">
+      <div class="relative w-full h-24">
+        <Image
+          src="/home-bg.jpeg"
+          alt="Hero"
+          width={1125}
+          height={750}
+          class="w-full h-24 absolute object-cover"
+        />
+        <div class="w-full h-24 absolute bg-black bg-opacity-65"></div>
+      </div>
+      <Header className="py-0 h-24" />
+    </div>
+    <nav class="bg-gray-100 py-12 text-center">
+      <h1 class="font-serif text-3xl uppercase tracking-bigger font-normal leading-relaxed text-tiny-black">
+        CONFIRMAÇÃO DE COMPRA
+      </h1>
+    </nav>
+    <main class="text-center py-10 px-5">
+      <FontAwesomeIcon icon={faCheckCircle} className="text-8xl text-esmerald mb-6" />
+      <h2 class="font-action font-bold text-xl mb-2">
+        Obrigado por escolher a Dux Patrono!
+      </h2>
+      <p class="text-sm font-sans text-small-gray leading-6">
+        Sua compra foi realizada com sucesso! Em breve você receberá uma mensagem em seu whatsapp com os detalhes da sua compra.
+      </p>
+    </main>
+  </div>
+</Layout>

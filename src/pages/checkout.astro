@@ -1,0 +1,137 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import { FieldWrapper } from '../components/FieldWrapper';
+import { TextInput } from '../components/TextInput';
+import { MaskedInput } from '../components/MaskedInput';
+---
+
+<Layout title="Checkout">
+  <div class="min-h-dvh relative mb-12">
+    <div class="relative">
+      <div class="relative w-full h-24">
+        <Image
+          src="/home-bg.jpeg"
+          alt="Hero"
+          width={1125}
+          height={750}
+          class="w-full h-24 absolute object-cover"
+        />
+        <div class="w-full h-24 absolute bg-black bg-opacity-65"></div>
+      </div>
+      <Header className="py-0 h-24" />
+    </div>
+    <nav class="bg-gray-100 py-12 px-6 text-center">
+      <h1 class="font-serif text-3xl uppercase tracking-bigger font-normal leading-relaxed text-tiny-black">
+        CHECKOUT
+      </h1>
+      <div class="text-xss flex items-center gap-1 justify-center mt-4 uppercase text-small-gray tracking-wider">
+        <a href="/catalogo" class="text-esmerald">
+          Catálogo
+        </a>
+        <span>/</span>
+        <a href="/carrinho" class="text-esmerald">
+          Carrinho
+        </a>
+        <span>/</span>
+        <p>
+          Checkout
+        </p>
+      </div>
+    </nav>
+    <!-- Personal information, Shipping Address, Payment(Stripe) -->
+    <div class="px-16 pt-10 lg:grid lg:grid-cols-2 lg:gap-8">
+      <div>
+        <div>
+          <h2 class="font-action font-bold text-xl mb-2">Informações pessoais</h2>
+          <p class="text-sm font-sans text-small-gray leading-6 mb-3">
+            Para confirmar sua compra, por favor, preencha o formulário abaixo com suas informações pessoais.
+            Este formulário é essencial para processarmos seu pedido e garantir que sua compra seja entregue
+            corretamente.
+          </p>
+          <FieldWrapper label="Nome" className="mb-3">
+            <TextInput name="firstName" />
+          </FieldWrapper>
+          <FieldWrapper label="Sobrenome" className="mb-3">
+            <TextInput name="firstName" />
+          </FieldWrapper>
+          <FieldWrapper label="Telefone (Whatsapp)">
+            <MaskedInput client:load name="whatsapp" mask="(__) _____-____" replacement={{ _: /\d/ }} />
+          </FieldWrapper>
+        </div>
+        <div class="mt-10">
+          <h2 class="font-action font-bold text-xl mb-2">Frete</h2>
+          <p class="text-sm font-sans text-small-gray leading-6 mb-3">
+            Para calcular o frete de sua compra, precisamos que você preencha o formulário de endereço abaixo.
+            Este passo é crucial para determinarmos o custo de envio baseado na localização de entrega e garantir
+            que seu pedido chegue ao destino correto.
+          </p>
+          <FieldWrapper label="Endereço" className="mb-3">
+            <TextInput name="address" autoComplete="shipping street-address" />
+          </FieldWrapper>
+          <FieldWrapper label="Número" className="mb-3">
+            <TextInput name="addressNumber" autoComplete="shipping" />
+          </FieldWrapper>
+          <FieldWrapper label="Cidade" className="mb-3">
+            <TextInput name="city" autoComplete="shipping address-level2" />
+          </FieldWrapper>
+          <FieldWrapper label="CEP" className="mb-3">
+            <TextInput name="zip" autoComplete="shipping postal-code" />
+          </FieldWrapper>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="font-action font-bold text-xl mb-2">Seu Pedido</h2>
+        <table class="w-full mb-3">
+          <thead class="uppercase text-small-gray font-serif-text font-normal text-xs">
+            <tr class="border-b border-b-gray-200 h-12">
+              <th class="font-normal text-start">Produto</th>
+              <th class="font-normal text-start">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="h-16 text-tiny-black border-b border-b-gray-200">
+              <td class="text-sm">
+                Conjunto esmeralda quadrado x3
+              </td>
+              <td class="text-xs pl-2">
+                R$310,47
+              </td>
+            </tr>
+            <tr class="h-12 text-tiny-black">
+              <td class="text-xs text-right">
+                SUBTOTAL
+              </td>
+              <td class="text-xs border-b border-b-gray-200 pl-2">
+                R$310,47
+              </td>
+            </tr>
+            <tr class="h-12 text-tiny-black">
+              <td class="text-xs text-right">
+                TOTAL
+              </td>
+              <td class="text-xs border-b border-b-gray-200 pl-2 font-bold">
+                R$310,47
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="p-30 bg-gray-200 h-20 flex justify-center items-center">
+          stripe checkout
+        </div>
+
+        <a
+          href="/checkout"
+          class="flex justify-center items-center
+            font-action tracking-bigger text-white bg-esmerald border-2 border-esmerald
+            h-11 px-6 text-xs uppercase mt-10
+          "
+        >
+          Finalizar Compra
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>
