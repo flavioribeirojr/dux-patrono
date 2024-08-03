@@ -6,6 +6,7 @@ type ProductBase = {
     Nome: string;
     Descricao: string;
     Preco: number;
+    slug: string;
     Foto: {
       data: {
         attributes: StrapiMedia

@@ -7,7 +7,7 @@ import { faAngleDown, faAngleUp, faCartPlus } from '@fortawesome/free-solid-svg-
 import { fetchFromStrapi, renderImageUrl } from '@/lib/strapi';
 import type { Product } from '@/interfaces/product';
 
-const products = await fetchFromStrapi<Product<'Nome' | 'Descricao' | 'Foto' | 'Preco'>[]>({
+const products = await fetchFromStrapi<Product<'Nome' | 'slug' | 'Descricao' | 'Foto' | 'Preco'>[]>({
   endpoint: 'produtos',
   wrappedByKey: 'data',
   query: {
@@ -64,10 +64,10 @@ const moneyFormatter = new Intl.NumberFormat('pt-BR', {
               />
             </div>
             <div class="w-fit block lg:col-start-3 lg:col-end-6">
-              <a href="/conjunto-esmeralda" class="block self-start uppercase text-xs font-serif font-medium mb-3 hover:underline underline-offset-2 text-tiny-black">
+              <a href={`/${product.attributes.slug}`} class="block self-start uppercase text-base font-serif font-medium mb-3 hover:underline underline-offset-2 text-tiny-black">
                 { product.attributes.Nome }
               </a>
-              <p class="text-small-gray text-sm font-light leading-6 self-start mb-4 font-sans">
+              <p class="text-tiny-black text-base font-light leading-7 self-start mb-4 font-sans">
                 { product.attributes.Descricao }
               </p>
               <p class="font-serif font-light text-black text-sm mb-5">

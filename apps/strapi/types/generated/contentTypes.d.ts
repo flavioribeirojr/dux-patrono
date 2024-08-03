@@ -368,6 +368,7 @@ export interface ApiProdutoProduto extends Schema.CollectionType {
     singularName: 'produto';
     pluralName: 'produtos';
     displayName: 'Produto';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -386,6 +387,7 @@ export interface ApiProdutoProduto extends Schema.CollectionType {
       Attribute.DefaultTo<0>;
     Foto: Attribute.Media<'images'>;
     Frete: Attribute.Component<'frete.frete'>;
+    slug: Attribute.UID<'api::produto.produto', 'Nome'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

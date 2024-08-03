@@ -4,7 +4,8 @@
   "info": {
     "singularName": "produto",
     "pluralName": "produtos",
-    "displayName": "Produto"
+    "displayName": "Produto",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -26,17 +27,22 @@
       "min": 0
     },
     "Foto": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "Frete": {
       "displayName": "Frete",
       "type": "component",
       "repeatable": false,
       "component": "frete.frete"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "Nome"
     }
   }
 }
