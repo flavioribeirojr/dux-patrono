@@ -4,5 +4,10 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "noUnusedLocals": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "module": "ES2020"
   }
 }

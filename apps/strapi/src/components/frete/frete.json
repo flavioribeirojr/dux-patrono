@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_frete_fretes",
+  "info": {
+    "displayName": "Frete",
+    "icon": "cube"
+  },
+  "options": {},
+  "attributes": {
+    "Altura_cm": {
+      "type": "integer",
+      "required": true
+    },
+    "Largura_cm": {
+      "type": "integer",
+      "required": true
+    },
+    "Comprimento_cm": {
+      "type": "integer",
+      "required": true
+    },
+    "Peso_kg": {
+      "type": "decimal"
+    }
+  }
+}

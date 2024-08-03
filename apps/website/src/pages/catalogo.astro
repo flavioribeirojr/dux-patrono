@@ -4,7 +4,21 @@ import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import { faAngleDown, faAngleUp, faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { fetchFromStrapi, renderImageUrl } from '@/lib/strapi';
+import type { Product } from '@/interfaces/product';
 
+const products = await fetchFromStrapi<Product<'Nome' | 'Descricao' | 'Foto' | 'Preco'>[]>({
+  endpoint: 'produtos',
+  wrappedByKey: 'data',
+  query: {
+    'populate': 'Foto'
+  }
+});
+
+const moneyFormatter = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+});
 ---
 
 <Layout title="Catálogo">
@@ -33,36 +47,36 @@ import { faAngleDown, faAngleUp, faCartPlus } from '@fortawesome/free-solid-svg-
       </h2>
       <div
         class="
-          w-full lg:w-3/4
+          w-full lg:w-3/4 xl:w-3/5
           ml-auto mr-auto
           flex flex-col gap-6
         "
       >
-        {[1, 2, 3].map(() => (
-          <div class="w-full flex lg:grid lg:grid-cols-4 lg:gap-5">
-            <div class="relative mr-4 w-1/2 lg:w-full">
+        {products.map(product => (
+          <div class="w-full flex flex-col lg:grid lg:grid-cols-5 lg:gap-5 border-b border-b-gray-200 pb-5 last:border-b-0">
+            <div class="relative mr-4 w-full lg:w-full lg:col-start-1 lg:col-end-3">
               <Image
-                src="/corrente.jpeg"
-                alt="Corrente"
-                width={300}
-                height={100}
-                class="object-cover w-full max-h-40 h-36 lg:absolute lg:w-full lg:h-full"
+                src={renderImageUrl(product.attributes.Foto.data.attributes.formats.medium.url)}
+                alt={product.attributes.Nome}
+                width={product.attributes.Foto.data.attributes.formats.medium.width}
+                height={product.attributes.Foto.data.attributes.formats.medium.height}
+                class="object-cover w-full max-h-52 h-52 mb-3 lg:mb-0 lg:absolute lg:w-full lg:h-full lg:max-h-full"
               />
             </div>
-            <div class="w-fit block lg:col-start-2 lg:col-end-5">
+            <div class="w-fit block lg:col-start-3 lg:col-end-6">
               <a href="/conjunto-esmeralda" class="block self-start uppercase text-xs font-serif font-medium mb-3 hover:underline underline-offset-2 text-tiny-black">
-                Conjunto esmeralda quadrado
+                { product.attributes.Nome }
               </a>
               <p class="text-small-gray text-sm font-light leading-6 self-start mb-4 font-sans">
-                Este conjunto de joias com esmeralda quadrada é uma verdadeira obra de arte, projetado para capturar a essência da elegância e do luxo.
+                { product.attributes.Descricao }
               </p>
-              <p class="font-serif font-light text-esmerald text-sm mb-5">
-                R$92,49
+              <p class="font-serif font-light text-black text-sm mb-5">
+                { moneyFormatter.format(product.attributes.Preco) }
               </p>
               <div class="flex flex-row items-center gap-3">
-                <div class="border-2 border-esmerald inline-flex">
+                <div class="border-2 border-black inline-flex">
                   <input type="number" class="w-14 h-8 outline-none text-center" value="1" />
-                  <div class="h-8 w-7 bg-esmerald flex flex-col">
+                  <div class="h-8 w-7 bg-black flex flex-col">
                     <button class="text-white text-xs text-center">
                       <FontAwesomeIcon icon={faAngleUp} />
                     </button>
@@ -71,13 +85,15 @@ import { faAngleDown, faAngleUp, faCartPlus } from '@fortawesome/free-solid-svg-
                     </button>
                   </div>
                 </div>
-                <a href="/carrinho" class="inline-flex items-center font-serif text-white bg-esmerald border-2 border-esmerald h-9 px-6 text-xs uppercase">
+                <a href="/carrinho" class="
+                  font-serif-text inline-flex items-center border-2 border-black text-tiny-black
+                  hover:text-white hover:bg-black h-9 px-6 text-sm uppercase transition-colors
+                ">
                   <FontAwesomeIcon icon={faCartPlus} className="mr-1" /> adicionar
                 </a>
               </div>
             </div>
           </div>
-          <hr />
         ))}
       </div>
     </main>
