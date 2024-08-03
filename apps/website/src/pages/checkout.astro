@@ -27,11 +27,11 @@ import { MaskedInput } from '../components/MaskedInput';
         CHECKOUT
       </h1>
       <div class="text-xss flex items-center gap-1 justify-center mt-4 uppercase text-small-gray tracking-wider">
-        <a href="/catalogo" class="text-esmerald">
+        <a href="/catalogo" class="text-black font-bold hover:underline underline-offset-2">
           Catálogo
         </a>
         <span>/</span>
-        <a href="/carrinho" class="text-esmerald">
+        <a href="/carrinho" class="text-black font-bold hover:underline underline-offset-2">
           Carrinho
         </a>
         <span>/</span>
@@ -40,7 +40,7 @@ import { MaskedInput } from '../components/MaskedInput';
         </p>
       </div>
     </nav>
-    <!-- Personal information, Shipping Address, Payment(Stripe) -->
+
     <div class="px-16 pt-10 lg:grid lg:grid-cols-2 lg:gap-8">
       <div>
         <div>
@@ -123,9 +123,10 @@ import { MaskedInput } from '../components/MaskedInput';
         </div>
 
         <a
-          href="/checkout"
+          href="/confirmacao-de-compra"
           class="flex justify-center items-center
-            font-action tracking-bigger text-white bg-esmerald border-2 border-esmerald
+            font-action tracking-bigger text-black bg-white border-2 border-black
+            hover:text-white hover:bg-black transition-colors
             h-11 px-6 text-xs uppercase mt-10
           "
         >
