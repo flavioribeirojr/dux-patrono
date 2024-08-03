@@ -23,7 +23,7 @@ export async function fetchFromStrapi<T>({
     endpoint = endpoint.slice(1);
   }
 
-  const url = new URL(`${import.meta.env.STRAPI_URL}/api/${endpoint}`);
+  const url = new URL(`${import.meta.env.PUBLIC_STRAPI_URL}/api/${endpoint}`);
 
   if (query) {
     Object.entries(query).forEach(([key, value]) => {
@@ -49,4 +49,4 @@ export async function fetchFromStrapi<T>({
   return data as T;
 }
 
-export const renderImageUrl = (imagePath: string) => `${import.meta.env.STRAPI_URL}${imagePath}`;
+export const renderImageUrl = (imagePath: string) => `${import.meta.env.PUBLIC_STRAPI_URL}${imagePath}`;

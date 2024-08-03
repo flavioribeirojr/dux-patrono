@@ -1,11 +1,10 @@
 ---
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import { faAngleDown, faAngleUp, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { fetchFromStrapi, renderImageUrl } from '@/lib/strapi';
 import type { Product } from '@/interfaces/product';
+import { ProductCatalogItem } from '@/components/ProductCatalogItem';
 
 const products = await fetchFromStrapi<Product<'Nome' | 'slug' | 'Descricao' | 'Foto' | 'Preco'>[]>({
   endpoint: 'produtos',
@@ -13,11 +12,6 @@ const products = await fetchFromStrapi<Product<'Nome' | 'slug' | 'Descricao' | '
   query: {
     'populate': 'Foto'
   }
-});
-
-const moneyFormatter = new Intl.NumberFormat('pt-BR', {
-  style: 'currency',
-  currency: 'BRL',
 });
 ---
 
@@ -53,47 +47,19 @@ const moneyFormatter = new Intl.NumberFormat('pt-BR', {
         "
       >
         {products.map(product => (
-          <div class="w-full flex flex-col lg:grid lg:grid-cols-5 lg:gap-5 border-b border-b-gray-200 pb-5 last:border-b-0">
-            <div class="relative mr-4 w-full lg:w-full lg:col-start-1 lg:col-end-3">
-              <Image
-                src={renderImageUrl(product.attributes.Foto.data.attributes.formats.medium.url)}
-                alt={product.attributes.Nome}
-                width={product.attributes.Foto.data.attributes.formats.medium.width}
-                height={product.attributes.Foto.data.attributes.formats.medium.height}
-                class="object-cover w-full max-h-52 h-52 mb-3 lg:mb-0 lg:absolute lg:w-full lg:h-full lg:max-h-full"
-              />
-            </div>
-            <div class="w-fit block lg:col-start-3 lg:col-end-6">
-              <a href={`/${product.attributes.slug}`} class="block self-start uppercase text-base font-serif font-medium mb-3 hover:underline underline-offset-2 text-tiny-black">
-                { product.attributes.Nome }
-              </a>
-              <p class="text-tiny-black text-base font-light leading-7 self-start mb-4 font-sans">
-                { product.attributes.Descricao }
-              </p>
-              <p class="font-serif font-light text-black text-sm mb-5">
-                { moneyFormatter.format(product.attributes.Preco) }
-              </p>
-              <div class="flex flex-row items-center gap-3">
-                <div class="border-2 border-black inline-flex">
-                  <input type="number" class="w-14 h-8 outline-none text-center" value="1" />
-                  <div class="h-8 w-7 bg-black flex flex-col">
-                    <button class="text-white text-xs text-center">
-                      <FontAwesomeIcon icon={faAngleUp} />
-                    </button>
-                    <button class="text-white text-xs text-center">
-                      <FontAwesomeIcon icon={faAngleDown} />
-                    </button>
-                  </div>
-                </div>
-                <a href="/carrinho" class="
-                  font-serif-text inline-flex items-center border-2 border-black text-tiny-black
-                  hover:text-white hover:bg-black h-9 px-6 text-sm uppercase transition-colors
-                ">
-                  <FontAwesomeIcon icon={faCartPlus} className="mr-1" /> adicionar
-                </a>
-              </div>
-            </div>
-          </div>
+          <ProductCatalogItem
+            product={product}
+            client:load
+          >
+            <Image
+              slot="image"
+              src={renderImageUrl(product.attributes.Foto.data.attributes.formats.medium.url)}
+              alt={product.attributes.Nome}
+              width={product.attributes.Foto.data.attributes.formats.medium.width}
+              height={product.attributes.Foto.data.attributes.formats.medium.height}
+              class="object-cover w-full max-h-52 h-52 mb-3 lg:mb-0 lg:absolute lg:w-full lg:h-full lg:max-h-full"
+            />
+          </ProductCatalogItem>
         ))}
       </div>
     </main>

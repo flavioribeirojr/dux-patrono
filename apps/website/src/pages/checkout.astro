@@ -5,6 +5,7 @@ import Header from '../components/Header.astro';
 import { FieldWrapper } from '../components/FieldWrapper';
 import { TextInput } from '../components/TextInput';
 import { MaskedInput } from '../components/MaskedInput';
+import { CheckoutCart } from '@/components/CheckoutCart';
 ---
 
 <Layout title="Checkout">
@@ -45,7 +46,7 @@ import { MaskedInput } from '../components/MaskedInput';
       <div>
         <div>
           <h2 class="font-action font-bold text-xl mb-2">Informações pessoais</h2>
-          <p class="text-sm font-sans text-small-gray leading-6 mb-3">
+          <p class="text-sm lg:text-base font-sans text-small-gray leading-6 mb-3">
             Para confirmar sua compra, por favor, preencha o formulário abaixo com suas informações pessoais.
             Este formulário é essencial para processarmos seu pedido e garantir que sua compra seja entregue
             corretamente.
@@ -62,7 +63,7 @@ import { MaskedInput } from '../components/MaskedInput';
         </div>
         <div class="mt-10">
           <h2 class="font-action font-bold text-xl mb-2">Frete</h2>
-          <p class="text-sm font-sans text-small-gray leading-6 mb-3">
+          <p class="text-sm lg:text-base font-sans text-small-gray leading-6 mb-3">
             Para calcular o frete de sua compra, precisamos que você preencha o formulário de endereço abaixo.
             Este passo é crucial para determinarmos o custo de envio baseado na localização de entrega e garantir
             que seu pedido chegue ao destino correto.
@@ -84,40 +85,7 @@ import { MaskedInput } from '../components/MaskedInput';
 
       <div>
         <h2 class="font-action font-bold text-xl mb-2">Seu Pedido</h2>
-        <table class="w-full mb-3">
-          <thead class="uppercase text-small-gray font-serif-text font-normal text-xs">
-            <tr class="border-b border-b-gray-200 h-12">
-              <th class="font-normal text-start">Produto</th>
-              <th class="font-normal text-start">Subtotal</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="h-16 text-tiny-black border-b border-b-gray-200">
-              <td class="text-sm">
-                Conjunto esmeralda quadrado x3
-              </td>
-              <td class="text-xs pl-2">
-                R$310,47
-              </td>
-            </tr>
-            <tr class="h-12 text-tiny-black">
-              <td class="text-xs text-right">
-                SUBTOTAL
-              </td>
-              <td class="text-xs border-b border-b-gray-200 pl-2">
-                R$310,47
-              </td>
-            </tr>
-            <tr class="h-12 text-tiny-black">
-              <td class="text-xs text-right">
-                TOTAL
-              </td>
-              <td class="text-xs border-b border-b-gray-200 pl-2 font-bold">
-                R$310,47
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <CheckoutCart client:load />
         <div class="p-30 bg-gray-200 h-20 flex justify-center items-center">
           stripe checkout
         </div>

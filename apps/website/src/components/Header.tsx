@@ -10,7 +10,6 @@ export function Header(props: { pathname: string; className?: string; }) {
 
   function handleScrollChange() {
     const shouldChangeHeaderPosition = window.scrollY > MIN_SCROLL_Y_OFFSET;
-    console.log(shouldChangeHeaderPosition);
 
     if (shouldChangeHeaderPosition) {
       setShouldChangeHeaderPosition(true);
