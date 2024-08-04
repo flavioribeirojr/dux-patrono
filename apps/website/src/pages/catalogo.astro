@@ -5,14 +5,28 @@ import { Image } from 'astro:assets';
 import { fetchFromStrapi, renderImageUrl } from '@/lib/strapi';
 import type { Product } from '@/interfaces/product';
 import { ProductCatalogItem } from '@/components/ProductCatalogItem';
+import { ProductCatalogCategories } from '@/components/ProductCatalogCategories';
+import type { Category } from '@/interfaces/category';
 
-const products = await fetchFromStrapi<Product<'Nome' | 'slug' | 'Descricao' | 'Foto' | 'Preco'>[]>({
+const categoryId = Astro.url.searchParams.get('categoryId');
+const categories = await fetchFromStrapi<Category[]>({
+  endpoint: 'categorias',
+  wrappedByKey: 'data',
+});
+
+const products = await fetchFromStrapi<Product<'Nome' | 'slug' | 'Descricao' | 'Foto' | 'Preco' | 'categoria'>[]>({
   endpoint: 'produtos',
   wrappedByKey: 'data',
   query: {
-    'populate': 'Foto'
+    'populate[0]': 'Foto',
+    'populate[1]': 'categoria',
+    ...categoryId && {
+      'filters[categoria][id][$eq]': categoryId,
+    }
   }
 });
+
+console.log(JSON.stringify(products, null, 2));
 ---
 
 <Layout title="Catálogo">
@@ -31,37 +45,47 @@ const products = await fetchFromStrapi<Product<'Nome' | 'slug' | 'Descricao' | '
       <Header className="py-0 h-24" />
     </div>
     <nav class="bg-gray-100 py-12 px-6 text-center">
-      <h1 class="font-serif text-3xl uppercase tracking-bigger font-normal leading-relaxed text-tiny-black">
+      <h1 class="font-serif text-3xl uppercase tracking-bigger font-normal leading-relaxed text-tiny-black mb-5">
         Catálogo
       </h1>
+      <ProductCatalogCategories client:load categories={categories} selectedCategory={categoryId} />
     </nav>
     <main class="relative px-5">
-      <h2 class="font-action uppercase text-sm text-small-gray text-center tracking-widest mb-10 mt-10">
-        Explore Nossos Produtos
-      </h2>
-      <div
-        class="
-          w-full lg:w-3/4 xl:w-3/5
-          ml-auto mr-auto
-          flex flex-col gap-6
-        "
-      >
-        {products.map(product => (
-          <ProductCatalogItem
-            product={product}
-            client:load
-          >
-            <Image
-              slot="image"
-              src={renderImageUrl(product.attributes.Foto.data.attributes.formats.medium.url)}
-              alt={product.attributes.Nome}
-              width={product.attributes.Foto.data.attributes.formats.medium.width}
-              height={product.attributes.Foto.data.attributes.formats.medium.height}
-              class="object-cover w-full max-h-52 h-52 mb-3 lg:mb-0 lg:absolute lg:w-full lg:h-full lg:max-h-full"
-            />
-          </ProductCatalogItem>
-        ))}
-      </div>
+      { products.length > 0 && (
+        <h2 class="font-action uppercase text-sm text-small-gray text-center tracking-widest mb-10 mt-10">
+          Explore Nossos Produtos
+        </h2>
+        <div
+          class="
+            w-full lg:w-3/4 xl:w-3/5
+            ml-auto mr-auto
+            flex flex-col gap-6
+          "
+        >
+          {products.map(product => (
+            <div class="border-b border-b-gray-200 last:border-b-0">
+              <ProductCatalogItem
+                product={product}
+                client:load
+              >
+                <Image
+                  slot="image"
+                  src={renderImageUrl(product.attributes.Foto.data.attributes.formats.medium.url)}
+                  alt={product.attributes.Nome}
+                  width={product.attributes.Foto.data.attributes.formats.medium.width}
+                  height={product.attributes.Foto.data.attributes.formats.medium.height}
+                  class="object-cover w-full max-h-52 h-52 mb-3 lg:mb-0 lg:absolute lg:w-full lg:h-full lg:max-h-full"
+                />
+              </ProductCatalogItem>
+            </div>
+          ))}
+        </div>
+      )}
+      { products.length === 0 && (
+        <p class="text-3xl font-serif-text text-tiny-black text-opacity-55 text-center py-16">
+            Nenhum produto encontrado
+        </p>
+      )}
     </main>
   </div>
 </Layout>

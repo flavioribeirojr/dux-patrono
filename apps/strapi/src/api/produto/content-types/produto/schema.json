@@ -43,6 +43,11 @@
     "slug": {
       "type": "uid",
       "targetField": "Nome"
+    },
+    "categoria": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::categoria.categoria"
     }
   }
 }

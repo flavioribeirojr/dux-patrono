@@ -17,7 +17,7 @@ export function CheckoutCart() {
 
   return (
     <table className='w-full mb-3'>
-      <thead className='uppercase text-small-gray font-serif-text font-normal text-xs lg:text-sm'>
+      <thead className='uppercase text-small-gray font-serif-text font-normal'>
         <tr className='border-b border-b-gray-200 h-12'>
           <th className='font-normal text-start'>Produto</th>
           <th className='font-normal text-start'>Subtotal</th>
@@ -26,36 +26,36 @@ export function CheckoutCart() {
       <tbody>
         { cartItemsValue.map(item => (
           <tr key={item.id} className='h-16 text-tiny-black border-b border-b-gray-200'>
-            <td className='text-sm lg:text-base'>
+            <td>
               { item.name } x{item.quantity}
             </td>
-            <td className='text-xs lg:text-sm pl-2'>
+            <td className='pl-2'>
               { moneyFormatter.format(item.price * item.quantity) }
             </td>
           </tr>
         ))}
         <tr className='h-12 text-tiny-black'>
-          <td className='text-xs lg:text-sm text-right'>
+          <td className='text-right'>
             SUBTOTAL
           </td>
-          <td className='text-xs lg:text-sm border-b border-b-gray-200 pl-2'>
+          <td className='border-b border-b-gray-200 pl-2'>
             { moneyFormatter.format(subtotal) }
           </td>
         </tr>
         <tr className='h-12 text-tiny-black'>
-          <td className='text-xs lg:text-sm text-right'>
+          <td className='text-right'>
             FRETE
           </td>
-          <td className='text-xs lg:text-sm border-b border-b-gray-200 pl-2'>
+          <td className='border-b border-b-gray-200 pl-2'>
             R$ 0,00 (Grátis)
           </td>
         </tr>
         {/* add shipping costs to total */}
         <tr className='h-12 text-tiny-black'>
-          <td className='text-xs lg:text-sm text-right'>
+          <td className='text-right'>
             TOTAL
           </td>
-          <td className='text-xs lg:text-sm border-b border-b-gray-200 pl-2 font-bold'>
+          <td className='border-b border-b-gray-200 pl-2 font-bold'>
             { moneyFormatter.format(subtotal) }
           </td>
         </tr>

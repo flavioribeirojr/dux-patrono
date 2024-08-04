@@ -12,6 +12,14 @@ type ProductBase = {
         attributes: StrapiMedia
       }
     };
+    categoria: {
+      data: {
+        id: number;
+        attributes: {
+          Nome: string;
+        }
+      }
+    };
     Frete: {
       Altura_cm: number;
       Largura_cm: number;

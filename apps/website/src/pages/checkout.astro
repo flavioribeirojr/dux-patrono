@@ -46,7 +46,7 @@ import { CheckoutCart } from '@/components/CheckoutCart';
       <div>
         <div>
           <h2 class="font-action font-bold text-xl mb-2">Informações pessoais</h2>
-          <p class="text-sm lg:text-base font-sans text-small-gray leading-6 mb-3">
+          <p class="lg:text-base font-sans text-small-gray leading-6 mb-3">
             Para confirmar sua compra, por favor, preencha o formulário abaixo com suas informações pessoais.
             Este formulário é essencial para processarmos seu pedido e garantir que sua compra seja entregue
             corretamente.
@@ -63,7 +63,7 @@ import { CheckoutCart } from '@/components/CheckoutCart';
         </div>
         <div class="mt-10">
           <h2 class="font-action font-bold text-xl mb-2">Frete</h2>
-          <p class="text-sm lg:text-base font-sans text-small-gray leading-6 mb-3">
+          <p class="lg:text-base font-sans text-small-gray leading-6 mb-3">
             Para calcular o frete de sua compra, precisamos que você preencha o formulário de endereço abaixo.
             Este passo é crucial para determinarmos o custo de envio baseado na localização de entrega e garantir
             que seu pedido chegue ao destino correto.
@@ -86,9 +86,6 @@ import { CheckoutCart } from '@/components/CheckoutCart';
       <div>
         <h2 class="font-action font-bold text-xl mb-2">Seu Pedido</h2>
         <CheckoutCart client:load />
-        <div class="p-30 bg-gray-200 h-20 flex justify-center items-center">
-          stripe checkout
-        </div>
 
         <a
           href="/confirmacao-de-compra"

@@ -5,7 +5,7 @@ import { CartQuantityUpdater } from './CartQuantityUpdater';
 import { AddToCartButton } from './AddToCartButton';
 
 export function ProductCatalogItem(props: {
-  product: Product<'Nome' | 'slug' | 'Descricao' | 'Foto' | 'Preco'>;
+  product: Product<'Nome' | 'slug' | 'Descricao' | 'Foto' | 'Preco' | 'categoria'>;
   image?: React.ReactNode;
 }) {
   const { product } = props;
@@ -18,11 +18,14 @@ export function ProductCatalogItem(props: {
   }, []);
 
   return (
-    <div className='w-full flex flex-col lg:grid lg:grid-cols-5 lg:gap-5 border-b border-b-gray-200 pb-5 last:border-b-0'>
+    <div className='w-full flex flex-col lg:grid lg:grid-cols-5 lg:gap-5 pb-5'>
       <div className='relative mr-4 w-full lg:w-full lg:col-start-1 lg:col-end-3'>
         { props.image }
       </div>
       <div className='w-fit block lg:col-start-3 lg:col-end-6'>
+        <p className='text-small-gray text-sm mb-2 tracking-widest font-serif-text uppercase'>
+          { product.attributes.categoria.data.attributes.Nome }
+        </p>
         <a href={`/${product.attributes.slug}`} className='block self-start uppercase text-base font-serif font-medium mb-3 hover:underline underline-offset-2 text-tiny-black'>
           { product.attributes.Nome }
         </a>
